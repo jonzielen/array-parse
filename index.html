@@ -7,11 +7,13 @@
   <title>Array Parser</title>
 </head>
 <body>
+  <div id="js-data"></div>
 
   <script src="attractions.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/forDisplay.js"></script>
   <script>
-    console.log(paginateByCardAttribute(data, 'cardFormat', 3, 6));
+    forDisplay(paginateByCardAttribute(data, 'cardFormat', 3, 6), 'js-data');
   </script>
 </body>
 </html>

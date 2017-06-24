@@ -1,16 +1,16 @@
 var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGroup) {
 
   var Builder = {
-    init: function(set) {
-      let finalData = this.breakArray(set);
+    init: function(dataSet) {
+      let finalData = this.breakArray(dataSet);
 
-      if (this.rowCheck(finalData) === true) {
+      if (this.rowCheck(finalData)) {
         return {
           data: finalData,
           pages: finalData.length
         };
       } else {
-        return this.init(this.arrayShuffle(set));
+        return this.init(this.arrayShuffle(dataSet));
       }
     },
     arrayShuffle: function(a) {
