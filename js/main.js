@@ -29,34 +29,29 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
     rowCheck: function(array) {
       let validRowCheck = array.reduce(function(previousValue, currentValue, index, array) {
         let count = {
-          first: currentValue.slice(0,itemsPerLine),
-          second: currentValue.slice(itemsPerLine),
-          cardFormatCounter: function(array) {
-            return array.reduce((previousValue, currentValue) => {
-              return previousValue + currentValue[attribute];
-            }, 0);
-          }
+          one: currentValue.slice(0,itemsPerLine),
+          two: currentValue.slice(itemsPerLine)
         }
 
         if (array.length > index + 1) {
-          if (count.cardFormatCounter(count.first) !== count.cardFormatCounter(count.second)) previousValue = false;
+          if (Builder.count(count.one) !== Builder.count(count.two)) previousValue = false;
         }
 
         // last array
         if (array.length === (index + 1)) {
-          if (count.cardFormatCounter(count.first) <= itemsPerLine && count.cardFormatCounter(count.second) === 0) {
+          if (Builder.count(count.one) <= itemsPerLine && Builder.count(count.two) === 0) {
             previousValue = previousValue;
           }
 
-          if ((count.cardFormatCounter(count.first) === itemsPerLine && count.cardFormatCounter(count.second) <= itemsPerLine)) {
+          if ((Builder.count(count.one) === itemsPerLine && Builder.count(count.two) <= itemsPerLine)) {
             previousValue = previousValue;
           }
 
-          if (count.cardFormatCounter(count.first) > itemsPerLine || count.cardFormatCounter(count.second) > itemsPerLine) {
+          if (Builder.count(count.one) > itemsPerLine || Builder.count(count.two) > itemsPerLine) {
             previousValue = false;
           }
 
-          if ((count.cardFormatCounter(count.first) + count.cardFormatCounter(count.second)) > itemsPerGroup) {
+          if ((Builder.count(count.one) + Builder.count(count.two)) > itemsPerGroup) {
             previousValue = false;
           }
         }
