@@ -29,29 +29,29 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
     rowCheck: function(array) {
       let validRowCheck = array.reduce(function(previousValue, currentValue, index, array) {
         let count = {
-          one: currentValue.slice(0,itemsPerLine),
-          two: currentValue.slice(itemsPerLine)
+          one: Builder.count(currentValue.slice(0,itemsPerLine)),
+          two: Builder.count(currentValue.slice(itemsPerLine))
         }
 
         if (array.length > index + 1) {
-          if (Builder.count(count.one) !== Builder.count(count.two)) previousValue = false;
+          if (count.one !== count.two) previousValue = false;
         }
 
         // last array
         if (array.length === (index + 1)) {
-          if (Builder.count(count.one) <= itemsPerLine && Builder.count(count.two) === 0) {
+          if (count.one <= itemsPerLine && count.two === 0) {
             previousValue = previousValue;
           }
 
-          if ((Builder.count(count.one) === itemsPerLine && Builder.count(count.two) <= itemsPerLine)) {
+          if ((count.one === itemsPerLine && count.two <= itemsPerLine)) {
             previousValue = previousValue;
           }
 
-          if (Builder.count(count.one) > itemsPerLine || Builder.count(count.two) > itemsPerLine) {
+          if (count.one > itemsPerLine || count.two > itemsPerLine) {
             previousValue = false;
           }
 
-          if ((Builder.count(count.one) + Builder.count(count.two)) > itemsPerGroup) {
+          if ((count.one + count.two) > itemsPerGroup) {
             previousValue = false;
           }
         }
