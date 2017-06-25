@@ -1,15 +1,21 @@
 var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGroup) {
+  var number = 0;
 
   var Builder = {
     init: function(dataSet) {
+
       let finalData = this.breakArray(dataSet);
+
+      number = number + 1;
 
       if (this.rowCheck(finalData)) {
         return {
           data: finalData,
-          pages: finalData.length
+          pages: finalData.length,
+          times: number
         }
       } else {
+
         return this.init(this.arrayShuffle(dataSet));
       }
     },
