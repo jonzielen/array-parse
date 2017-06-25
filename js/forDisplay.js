@@ -13,5 +13,4 @@ var forDisplay = function(data, elem) {
   });
 
   hostElem.innerHTML = template;
-  console.log(data, hostElem);
 };

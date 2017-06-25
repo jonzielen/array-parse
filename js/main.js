@@ -1,23 +1,18 @@
 var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGroup) {
-  var number = 0;
 
   var Builder = {
+    numb: 0,
     init: function(dataSet) {
-
       let finalData = this.breakArray(dataSet);
+      this.numb++;
 
-      number = number + 1;
+      if (!this.rowCheck(finalData)) return this.init(this.arrayShuffle(dataSet));
 
-      if (this.rowCheck(finalData)) {
-        return {
-          data: finalData,
-          pages: finalData.length,
-          times: 'Loops: ' + new Intl.NumberFormat().format(number)
-        }
-      } else {
-
-        return this.init(this.arrayShuffle(dataSet));
-      }
+      return {
+        data: finalData,
+        pages: finalData.length,
+        times: 'Loops: ' + new Intl.NumberFormat().format(this.numb)
+      };
     },
     arrayShuffle: function(a) {
       for (let i = a.length; i; i--) {
