@@ -4,13 +4,11 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
     init: function(dataSet) {
       let finalData = this.breakArray(dataSet);
 
-      if (this.rowCheck(finalData)) {
-        return {
-          data: finalData,
-          pages: finalData.length
-        };
-      } else {
-        return this.init(this.arrayShuffle(dataSet));
+      while (this.rowCheck(finalData)) return this.init(this.arrayShuffle(dataSet));
+
+      return {
+        data: finalData,
+        pages: finalData.length
       }
     },
     arrayShuffle: function(a) {
@@ -22,11 +20,9 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
       return a;
     },
     count: function(items) {
-      let count = items.reduce((previousValue, currentValue) => {
+      return items.reduce(function(previousValue, currentValue) {
         return previousValue + currentValue[attribute];
       }, 0);
-
-      return count;
     },
     rowCheck: function(array) {
       let validRowCheck = array.reduce(function(previousValue, currentValue, index, array) {

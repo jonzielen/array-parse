@@ -1,6 +1,6 @@
 var forDisplay = function(data, elem) {
   var hostElem = document.getElementById(elem),
-      template = ``;
+      template = `<h4>Pages: ${data.pages}</h4>`;
 
   data.data.forEach(function(set) {
     template = template + `<h5>Items: ${set.length}</h5>`;
