@@ -12,7 +12,7 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
         return {
           data: finalData,
           pages: finalData.length,
-          times: number
+          times: 'Loops: ' + new Intl.NumberFormat().format(number)
         }
       } else {
 
