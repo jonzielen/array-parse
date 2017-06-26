@@ -6,7 +6,7 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
       let finalData = this.breakArray(dataSet);
       this.numb++;
 
-      // if no result after 12000 trys, dump data, prevent call stack error
+      // if no result after 12000 tries, dump data, prevent call stack error
       if (this.numb === 12000) return this.nuclear(finalData);
 
       // row check
@@ -75,7 +75,7 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
           chunk = [];
 
       data.forEach((item, index, array) => {
-        if ((index > 0 && Builder.setCheck(chunk)) || Builder.count(chunk) > itemsPerGroup) {
+        if ((index > 0 && Builder.setCheck(chunk)) || Builder.count(chunk) >= itemsPerGroup) {
           pages.push(chunk);
           chunk = [];
         }
