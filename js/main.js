@@ -6,8 +6,13 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
       let finalData = this.breakArray(dataSet);
       this.numb++;
 
+      // if no result after 12000 trys, dump data, prevent call stack error
+      if (this.numb === 12000) return this.nuclear(finalData);
+
+      // row check
       if (!this.rowCheck(finalData)) return this.init(this.arrayShuffle(dataSet));
 
+      // returned data
       return {
         data: finalData,
         pages: finalData.length,
@@ -70,7 +75,7 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
           chunk = [];
 
       data.forEach((item, index, array) => {
-        if (index > 0 && Builder.setCheck(chunk)) {
+        if ((index > 0 && Builder.setCheck(chunk)) || Builder.count(chunk) > itemsPerGroup) {
           pages.push(chunk);
           chunk = [];
         }
@@ -82,6 +87,13 @@ var paginateByCardAttribute = function(data, attribute, itemsPerLine, itemsPerGr
 
       return pages;
     },
+    nuclear: function(data) {
+      return {
+        data: data,
+        pages: data.length,
+        times: 'Loops: ' + new Intl.NumberFormat().format(this.numb)
+      };
+    }
   };
 
   return Builder.init(data);

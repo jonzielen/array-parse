@@ -7,7 +7,7 @@ var forDisplay = function(data, elem) {
 
     template = template + `<ul>`;
     set.forEach(function(elem) {
-      template = template + `<li>${elem.title}  ${elem.cardFormat}</li>`;
+      template = template + `<li>${elem.title} <strong>${elem.cardFormat}</strong></li>`;
     });
     template = template + `</ul></div>`;
   });
